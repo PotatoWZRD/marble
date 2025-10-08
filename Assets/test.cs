@@ -36,13 +36,16 @@ public class test : MonoBehaviour
             {
                 if (go.commando == 'c')
                 {
-                    GameObject test = Instantiate(marbleTest);
-                    test.transform.position = Vector2.zero;
-                    go.player = test;
-                    if (int.TryParse(go.name.Substring(0, 3), out int id))
+                    if (!ts.Contains(go))
                     {
-                        go.player.name = id.ToString();
-                        go.id = id;
+                        GameObject test = Instantiate(marbleTest);
+                        test.transform.position = new Vector2(Random.Range(-5f, 5f), 5);
+                        go.player = test;
+                        if (int.TryParse(go.name.Substring(0, 3), out int id))
+                        {
+                            go.player.name = id.ToString();
+                            go.id = id;
+                        }
                     }
                 }
                 else if(go.commando == 'j')
