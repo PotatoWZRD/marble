@@ -53,44 +53,52 @@ public class marbServerManager : MonoBehaviour
                     m.player.name = m.name;
 
                     //color here
-                    switch (m.player.transform.childCount)
+                    switch (m.player.transform.childCount - 1)
                     {
                         case 1:
                             if (ColorUtility.TryParseHtmlString(m.color1, out Color one))
                             {
-                                m.player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = one;
+                                m.player.transform.GetChild(1).GetComponent<SpriteRenderer>().color = one;
                             }
                             break;
                         case 2:
                             if (ColorUtility.TryParseHtmlString(m.color1, out Color one2))
                             {
-                                m.player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = one2;
+                                m.player.transform.GetChild(1).GetComponent<SpriteRenderer>().color = one2;
                             }
                             if (ColorUtility.TryParseHtmlString(m.color2, out Color two))
                             {
-                                m.player.transform.GetChild(1).GetComponent<SpriteRenderer>().color = two;
+                                m.player.transform.GetChild(2).GetComponent<SpriteRenderer>().color = two;
                             }
                             break;
                         case 3:
                             if (ColorUtility.TryParseHtmlString(m.color1, out Color one3))
                             {
-                                m.player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = one3;
+                                m.player.transform.GetChild(1).GetComponent<SpriteRenderer>().color = one3;
                             }
                             if (ColorUtility.TryParseHtmlString(m.color2, out Color two2))
                             {
-                                m.player.transform.GetChild(1).GetComponent<SpriteRenderer>().color = two2;
+                                m.player.transform.GetChild(2).GetComponent<SpriteRenderer>().color = two2;
                             }
                             if (ColorUtility.TryParseHtmlString(m.color3, out Color three))
                             {
-                                m.player.transform.GetChild(2).GetComponent<SpriteRenderer>().color = three;
+                                m.player.transform.GetChild(3).GetComponent<SpriteRenderer>().color = three;
                             }
                             break;
                     }
 
                 }
-                else if(m.command == 'j')
-                {
-                    m.player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+                else if (m.command == 'f')
+                {//here abilities
+                    m.player.GetComponent<fireBallCode>().timer = true;
+                }
+                else if (m.command == 's')
+                {//here abilities
+                    m.player.GetComponent<fireBallCode>().timer2 = true;
+                }
+                else if (m.command == 'b')
+                {//here abilities
+                    m.player.GetComponent<fireBallCode>().timer3 = true;
                 }
             }
             Loader.Clear();
@@ -131,6 +139,39 @@ public class marbServerManager : MonoBehaviour
                 foreach (Player p in playerList)
                 {
                     if (p.id == data_id)
+                    {
+                        p.command = command;
+                        Loader.Add(p);
+                    }
+                }
+                break;
+            case 'f':
+                int.TryParse(marbleData[1], out int e);
+                foreach (Player p in playerList)
+                {
+                    if (p.id == e)
+                    {
+                        p.command = command;
+                        Loader.Add(p);
+                    }
+                }
+                break;
+            case 's':
+                int.TryParse(marbleData[1], out int r);
+                foreach (Player p in playerList)
+                {
+                    if (p.id == r)
+                    {
+                        p.command = command;
+                        Loader.Add(p);
+                    }
+                }
+                break;
+            case 'b':
+                int.TryParse(marbleData[1], out int t);
+                foreach (Player p in playerList)
+                {
+                    if (p.id == t)
                     {
                         p.command = command;
                         Loader.Add(p);
